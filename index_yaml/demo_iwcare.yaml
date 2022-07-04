@@ -1,0 +1,5 @@
+---
+indexes:
+- name: demo_iwcare
+  description: Demonstration for the awesome Splunk user group users.
+  owner: Splunk admins
