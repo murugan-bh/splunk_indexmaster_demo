@@ -1,0 +1,99 @@
+==============================================================
+Hyperlinks from file: Splunk 8.2 Cluster Administration Slides
+==============================================================
+
+9: Reference Servers for Distributed Deployment
+  http://docs.splunk.com/Documentation/Splunk/latest/Capacity/Referencehardware
+  http://docs.splunk.com/Documentation/Splunk/latest/Capacity/Summaryofperformancerecommendations
+
+
+22: Indexer Cluster System Requirements
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Systemrequirements
+
+
+48: Master Node Failover
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Handlemasternodefailure
+
+
+53: Upgrading and Applying Maintenance Releases
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Upgradeacluster
+
+80: Indexer Cluster Searchable Rolling Upgrade
+  https://docs.splunk.com/Documentation/Splunk/7.0.0/Indexer/Upgradeacluster
+
+81: Further Reading: Clustering
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Basicconcepts
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Mastersitefailure
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Configurethesearchhead
+
+
+99: Permanently Decommissioning a Peer Node
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Takeapeeroffline
+
+
+101: Indexer Cluster Peer Status
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Howtomonitoracluster
+
+
+112: Data Rebalancing (cont.)
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/rebalancethecluster
+
+
+149: Report Scheduler
+  http://docs.splunk.com/Documentation/Splunk/latest/Report/Configurethepriorityofscheduledreports
+
+
+160: Configuration and Artifact Replication
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/HowconfrepoworksinSHC
+
+
+170: Further Reading: Search Head Cluster
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/SHCarchitecture
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/Migratefromsearchheadpooling
+
+188: Checking SHC Bundle Deployment Status
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/HowconfrepoworksinSHC
+
+
+196: Adding Search Head Members
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/Handlememberfailure
+
+
+199: Upgrading a Search Head Cluster 
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/UpgradeaSHC
+
+
+208: Further Reading:
+  https://docs.splunk.com/Documentation/Splunk/latest/Indexer/Forwardmanagerdata
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/PropagateSHCconfigurationchanges
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/ViewSHCstatusinDMC
+  http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/Staticcaptain
+
+
+232: Further Reading: KV Store
+  docs.splunk.com/Documentation/Splunk/latest/Admin/AboutKVstore
+  docs.splunk.com/Documentation/Splunk/latest/Knowledge/ConfigureKVstorelookups
+  docs.splunk.com/Documentation/Splunk/latest/Admin/BackupKVstore
+
+
+237: SmartStore Architecture Overview
+  https://en.wikipedia.org/wiki/Amazon_S3
+  https://github.com/splunk/s3-tests
+
+238: Considerations for Moving to SmartStore
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/AboutSmartStore
+
+239: Deploying SmartStore - Requirements
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Systemrequirements
+
+242: Deploying SmartStore - Migration
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/MigratetoSmartStore
+  
+249: Cache Size Settings
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/ConfigureSmartStorecachemanager
+
+253: Further Reading: Splunk SmartStore
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/AboutSmartStore
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/SmartStoresearching
+  http://docs.splunk.com/Documentation/Splunk/latest/Indexer/TroubleshootSmartStore
+

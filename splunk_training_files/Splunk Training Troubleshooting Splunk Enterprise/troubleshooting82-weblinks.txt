@@ -1,0 +1,134 @@
+==================================================================
+Hyperlinks from: Troubleshooting Splunk Enterprise 8.1 Slides
+==================================================================
+
+9: Step 1 - Clarify the Problem
+  http://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/IntrototroubleshootingSplunk
+
+10: Step 2 - Confirm the Problem
+  http://answers.splunk.com
+  http://wiki.splunk.com
+  http://docs.splunk.com/Documentation/Splunk/latest/ReleaseNotes/Knownissues
+
+11: Step 3 - Proceed to Resolution
+  https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/IntrototroubleshootingSplunk#collapseDesktop1
+  https://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Cantfinddata
+  https://community.splunk.com/t5/Splunk-Answers/ct-p/en-us-splunk-answers
+
+12. Submitting a Case
+  http://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/HowtofileagreatSupportcase
+
+14: Splunk Diagnostic Tools
+  http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTprolog
+
+16: What Splunk Logs About Itself
+  http://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/WhatSplunklogsaboutitself
+
+18: Splunk Log Channel Levels
+  http://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Enabledebuglogging
+
+23: Splunk Instrumentation
+  http://docs.splunk.com/Documentation/Splunk/latest/Admin/Shareperformancedata
+
+24: What is a Splunk diag?
+  http://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/AnonymizedatasamplestosendtoSupport
+
+27: Diag Run Options Ð Component On/Off
+  http://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/Generateadiag
+
+45: Indexing Pipeline Set
+  http://wiki.splunk.com/Community:HowIndexingWorks 
+
+82: Deployment Problems
+  http://docs.splunk.com/Documentation/Splunk/latest/Updating/Calculatedeploymentserverperformance
+  http://docs.splunk.com/Documentation/Splunk/latest/Updating/Forwardermanagementcompatibility
+
+84: Review: Forwarding Problem
+  http://docs.splunk.com/Documentation/Splunk/latest/Forwarding/Receiverconnection
+
+94: Diagnosing Installation Issues
+  https://docs.splunk.com/Documentation/Splunk/latest/ InstallationHowtoupgradeSplunk#Upgrade_paths_to_version_8.2
+
+95: Upgrading Splunk Enterprise
+  http://docs.splunk.com/Documentation/Splunk/latest/Installation/HowtoupgradeSplunk
+
+96. Considerations for Upgrading
+  https://docs.splunk.com/Documentation/Splunk/latest/Installation/AboutupgradingREADTHISFIRST
+
+97. Python Version 3.1 Migration in Splunk
+  https://docs.splunk.com/Documentation/Splunk/latest/Python3Migration/AboutMigration
+
+100: Review: License Issues Overview
+  http://docs.splunk.com/Documentation/Splunk/latest/Admin/TypesofSplunklicenses
+  https://www.splunk.com/en_us/legal/splunk-software-license-agreement.html
+
+100: Diagnosing Installation Issues
+  https://docs.splunk.com/Documentation/Splunk/latest/Installation/HowtoupgradeSplunk#Upgrade_paths_to_version_8.2
+
+109: Troubleshooting Users and Roles
+  http://docs.splunk.com/Documentation/Splunk/latest/Security/Rolesandcapabilities
+
+111: Working with LDAP Problems
+  https://technet.microsoft.com/en-us/adexplorer
+
+114: Working with SAML Problems
+  http://docs.splunk.com/Documentation/Splunk/latest/Security/TroubleshootSAMLSSO
+
+133: Scheduler Oversubscription Ð Workarounds
+  http://docs.splunk.com/Documentation/Splunk/latest/Report/PrioritizescheduledreportsinSplunkWeb
+
+137: Troubleshooting a Crash
+  http://docs.splunk.com/Documentation/Splunk/latest/Troubleshooting/ulimitErrors
+  https://www.splunk.com/en_us/blog/tips-and-tricks/whats-your-ulimit.html
+
+138: Splunk Workload Management (WLM)
+  http://docs.splunk.com/Documentation/Splunk/latest/Workloads/Keyconcepts
+
+
+150: Determine Where the Search Breaks
+  https://en.wikipedia.org/wiki/Lisp_(programming_language)
+  
+151: Search Job Inspector
+  http://docs.splunk.com/Documentation/Splunk/latest/Search/ViewsearchjobpropertieswiththeJobInspector
+
+157: Search-Time Operation Sequence
+  http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/Searchtimeoperationssequence
+
+163: What's Next?
+  https://www.splunk.com/en_us/training/faq-training.html
+  https://www.splunk.com/pdfs/training/Splunk-Certification-Candidate-Handbook.pdf
+  https://www.splunk.com/pdfs/training/Exam-Registration-Tutorial.pdf
+
+164: YouTube: The Splunk How-To Channel
+  http://www.youtube.com/c/SplunkHowTo
+
+166: Splunk Self-service Support Resources
+  http://docs.splunk.com
+  http://community.splunk.com
+
+167: Splunk Community Portal
+  https://community.splunk.com
+  https://www.splunk.com/en_us/blog
+  http://dev.splunk.com
+  http://wiki.splunk.com
+  https://usergroups.splunk.com
+
+168: Splunk Support Programs
+  https://www.splunk.com/en_us/support-and-services/support-programs.html
+  
+169: Splunk Support Case Priority Levels
+  https://www.splunk.com/en_us/support-and-services/support-programs.html
+
+170: Escalating to Splunk Support
+  http://login.splunk.com/page/sso_redirect?type=portal
+  http://www.splunk.com/en_us/about-us/contact.html#tabs/customer-support
+
+171: Splunk Success Plans
+  https://www.splunk.com/en_us/support-and-services/support-programs.html#success
+  https://www.splunk.com/pdfs/legal/Splunk-Admin-On-Demand-CSM-Datasheet-101.pdf
+
+170: Windows Inputs Errors and Fixes
+  http://docs.splunk.com/Documentation/Splunk/latest/Data/MonitorActiveDirectory
+  
+175: Windows Inputs Errors and Fixes (cont.)
+  https://docs.microsoft.com/en-us/sysinternals/

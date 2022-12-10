@@ -1,0 +1,214 @@
+=======================================================================
+Splunk Searches from: Troubleshooting Splunk Enterprise 8.2 Slides
+=======================================================================
+-----------------------------------------
+Module 1
+-----------------------------------------
+TCP input REST endpoint search:     | rest /services/data/inputs/tcp/raw | fields - eai* | transpose
+Btool CLI for TCP input:            splunk btool inputs list tcp://<port>
+CLI for changing debug level:       splunk set log-level <channel> -level DEBUG
+Search TCP related errors:          index=_internal host=idx* sourcetype=splunkd component=tcp* (ERROR OR WARN)
+In-memory config REST endpoint:     | rest /services/properties/
+Monitor input REST endpoint:        | rest /services/data/inputs/monitor
+Platform info REST endpoint:        | rest /services/server/info
+Resource usage REST endpoint:       | rest /services/server/status/resource-usage
+Splunk health REST endpoint:        | rest /services/server/health/splunkd
+
+-----------------------------------------
+Module 2
+-----------------------------------------
+Server roles detected by Splunk     | rest /services/server/info | fields server_roles
+
+Input pipeline activity searches:
+    index=_internal source=*metrics.log host=xyz group IN(pipeline, queue)
+    index=_internal source=*metrics.log group=pipeline name=exec processor=*
+    index=_internal source=*metrics.log group=queue name=parsingqueue
+    index=_internal source=*metrics.log group=pipeline name=parsing processor=*
+    index=_internal source=*metrics.log group=queue name=aggqueue
+    index=_internal source=*metrics.log group=pipeline name=merging processor=*
+    index=_internal source=*metrics.log group=queue name=typingqueue
+    index=_internal source=*metrics.log group=pipeline name=typing processor=*
+    index=_internal source=*metrics.log group=queue name=indexqueue
+    index=_internal source=*metrics.log group=pipeline name=indexerpipe processor=*
+    index=_internal source=*metrics.log group=per_index_thruput series=<index_name>
+
+How much time is Splunk spending within each pipeline?
+    index=_internal source=*metrics.log* group=pipeline | timechart sum(cpu_seconds) by name
+
+How much time is Splunk spending within each processor?
+    index=_internal source=*metrics.log* group=pipeline | timechart sum(cpu_seconds) by processor
+
+What is the 95th percentile of measured queue size?
+    index=_internal source=*metrics.log* group=queue | timechart perc95(current_size) by name
+
+What is the maximum number of entries used in each queue?
+    index=_internal source=*metrics.log* group=queue | timechart max(current_size) by name
+
+-----------------------------------------
+Module 3
+-----------------------------------------
+Check the current file monitoring status
+    CLI:  splunk list inputstatus [-input | -type]
+    REST: /services/admin/inputstatus/TailingProcessor:FileStatus
+
+Check the internal index for possible clues:
+    index=_internal sourcetype=splunkd component=watchedfile
+
+Check the fishbucket and change/reset the tailing records if needed:
+    splunk cmd btprobe Ðh
+    splunk cmd btprobe -d <fishbucket_path> -k <file> Ðvalidate
+    splunk cmd btprobe -d <fishbucket_path> -file <file> --reset
+
+Look for offset in the WatchedFile component:
+    index=_internal sourcetype=splunkd component=watchedfile
+
+Duplicate Indexing:
+    index=abc sourcetype=xyz
+    | convert ctime(_indextime) AS idxtime
+    | stats count dc(idxtime) as numIndexed, values(source), values(idxtime) by _raw
+    | where count > 1
+
+Manual test of a script input:
+    splunk cmd ../etc/apps/<app>/bin/<script>
+
+Input data quality:
+    index=_internal sourcetype=splunkd (log_level=WARN OR log_level=ERROR)
+    (component=AggregatorMiningProcessor OR component=LineBreakingProcessor OR component=DateParserVerbose) 
+
+Troubleshooting indexing latency:
+How long does it take to make your indexed data searchable?
+    index=a source=b
+    | eval latency = round((_indextime - _time),2)
+    | timechart min(latency) avg(latency) max(latency) by host
+
+Compare the delay between your log and the Splunk internal logs:
+    index=_internal metrics host=<uf> group=per_sourcetype_thruput 
+    | timechart avg(kbps) by series
+    
+-----------------------------------------
+Module 4
+-----------------------------------------
+Show me all deployment messages on the deployment server: 
+    index=_internal component=DS* host=<ds> | stats count by event_message
+
+Show me all deployment client messages from the client:
+    index=_internal component=DC* host=<uf> | stats count by event_message
+
+Show me all deployment app-related activities: 
+    index=_internal component=Deploy* host=<uf> | stats count by event_message
+
+Are the servers connected?
+    index=_internal sourcetype=splunkd connection* | stats count by sourceIp, host, destPort
+
+    index=_internal host=uf* component=TcpOutputProc
+
+Is the forwarder working?
+    index=_internal host=uf* component=Metrics group=queue name=tcp*
+
+Which forwarders are sending data to Splunk and how much?
+    index=_internal sourcetype=splunkd host=<indexer> metrics tcpin_connections | timechart span=5m max(tcp_KBps) by sourceIp
+
+Where is the forwarder trying to send data to?
+    index=_internal sourcetype=splunkd metrics group=tcpin_connections connectionType=cooked* | stats   sum(kb) by hostname, fwdType, lastIndexer
+
+What output queues are set up?
+    index=_internal host=<uf> source=*metrics.log group=queue tcpout | stats count by name
+
+-----------------------------------------
+Module 5
+-----------------------------------------
+conf backup before upgrading Splunk Enterprise:
+    splunk diag --collect=etc
+    
+CLI to rotate splunk.secret
+    splunk rotate splunk-secret
+
+License related events:
+    index=_internal sourcetype=splunkd component=LM*
+
+    index=_internal sourcetype=splunkd component=LicenseUsage* | top type
+
+    index=_internal component=Metrics per_index_thruput
+    | eval mb=(kb/1024)
+    | timechart span=1h sum(mb) by series
+    | addtotals
+
+User related events:
+    index=_internal component=UserManagerPro OR component=AuthenticationManagerLDAP OR ScopedLDAPConnection
+
+Validate the user capabilities:
+    | rest /servicesNS/<user>/user-prefs/authorization/capabilities
+
+Check the user's runtime quota restrictions:
+    | rest /services/admin/quota-usage | search title=<user>
+    | fields srchDiskQuota, diskUsage, srchJobsQuota, historicalSearchCount, rtSrchJobsQuota, realTimeSearchCount, srchMaxTime
+
+LDAP LDIF check:
+  UNIX:    ldapsearch Ðx -h <host> -p <port> -b "<(user|group)BaseDN>" -D "<bindDN>" -w <realNameAttribute>
+  Windows: ldifde -f output.ldif
+
+-----------------------------------------
+Module 6
+-----------------------------------------
+Bundle activity:
+    index=_internal sourcetype=splunkd_access host=<peer> uri_path="*bundle*/<sh>"
+
+
+To confirm the CPU count:
+    | rest /services/server/info | table host numberOfVirtualCores
+
+    index=_internal sourcetype=splunkd loader cpu
+
+What Is Using Up Concurrent Search Slots?
+    | rest /services/server/status/limits/search-concurrency | transpose
+
+Skipped searches:
+    index=_internal sourcetype=scheduler status=skipped | stats count values(alert_actions) by savedsearch_name, reason
+
+    index=_audit action=search | stats count by info
+
+Find System Memory section in the diag:
+    index=mydiag source="*systeminfo.txt" "System Memory"
+
+Find DF output section in the diag:
+    index=mydiag source="*systeminfo.txt" "DF output"
+
+Show me all Splunk restarts based on loader?
+    index=_internal sourcetype=splunkd loader event_message=*xml
+
+When did Splunk last crash?
+    index=_internal sourcetype=splunkd_crash_log
+
+If no crash log exists:
+    index=_internal sourcetype=splunkd ("pipelines finished" OR "My GUID")
+    | transaction startswith="My GUID" endswith="pipelines finished" keepevicted=true keeporphans=true
+    | search closed_txn=0
+    | head 1
+    
+-----------------------------------------
+Module 7
+-----------------------------------------
+A list of all current jobs:
+    | rest /services/search/jobs
+
+Lengthy search?
+    index="_audit" action="search" (id=* OR search_id=*)
+    | eval user=if(user=="n/a",null(),user)
+    | stats max(total_run_time) as total_run_time first(user) as user by search_id
+    | stats count perc95(total_run_time) median(total_run_time) by user
+
+How much time are the indexers spending in response to queries from SH? 
+    index=_internal source=*remote_searches.log server=<sh> | stats max(elapsedTime) by search_id host
+
+Identify all splunkd responses taking more than 100ms 
+    index=_internal sourcetype=splunkd_access host=<sh> user=<user> | rex "(?<spent>\d+)ms" | search spent > 100
+
+What is the size of the artifacts?
+    index=_internal sourcetype=splunkd_access method=GET jobs | stats sum(bytes) by uri
+
+When events occurred and actually indexed:
+    <base_search> | head | convert ctime(_time) as evtTime ctime(_indextime) as idxTime
+    | eval lag=_indextime-_time | table evtTime idxTime lag
+
+
+
